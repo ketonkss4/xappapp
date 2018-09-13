@@ -8,7 +8,11 @@ import com.xappdem.pmd.xappdem.data.RepoResult
 import android.content.Intent
 import android.net.Uri
 
-
+/**
+ * This class is a simple dumb view that shows additional details
+ * not seen in the RepoListView. Also launches browser intent to
+ * allow user to go directly to the repository online
+ */
 class RepoDetailActivity : AppCompatActivity() {
     companion object {
         const val REPO_KEY = "REPO_KEY"

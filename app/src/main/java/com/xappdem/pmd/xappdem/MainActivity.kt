@@ -1,6 +1,5 @@
 package com.xappdem.pmd.xappdem
 
-import android.app.ProgressDialog.show
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -8,7 +7,6 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import com.xappdem.pmd.xappdem.RepoDetailActivity.Companion.REPO_KEY
@@ -18,11 +16,13 @@ import com.xappdem.pmd.xappdem.data.RepoResult
 import com.xappdem.pmd.xappdem.presenter.RepoListPresenter
 import com.xappdem.pmd.xappdem.presenter.dependecies.DaggerRepoListComponent
 import com.xappdem.pmd.xappdem.presenter.dependecies.RepoListModule
-import io.reactivex.Observable
 import javax.inject.Inject
 
 
 /**
+ * This activity contains the repolist view. It is designed to be
+ * a dumb view devoid of any logic not pertaining to view manipulation.
+ * For everything else dependencies are used
  */
 class MainActivity : AppCompatActivity(), RepoListPresenter.RepoListView {
 
@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity(), RepoListPresenter.RepoListView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //dagger is used to inject the presenter
+        //this way dummy data can be supplied by a mock for testing
         DaggerRepoListComponent.builder()
                 .appComponent((application as GitApp).appComponent)
                 .repoListModule(RepoListModule(this))
@@ -56,13 +58,12 @@ class MainActivity : AppCompatActivity(), RepoListPresenter.RepoListView {
     }
 
     override fun onListDataResponse(list: List<RepoResult>) {
-        Log.v(MainActivity::class.simpleName, "On List Data Response")
         if (swipeContainer.isRefreshing) swipeContainer.isRefreshing = false
         progessIndicator.visibility = View.GONE
         repoListAdapter.refreshList(list as ArrayList<RepoResult>)
     }
 
-    fun subscribeToClickEvents() {
+    private fun subscribeToClickEvents() {
         repoListAdapter.observeClicks()
                 .subscribe { repo ->
                     val intent = Intent(this@MainActivity, RepoDetailActivity::class.java)
@@ -74,7 +75,6 @@ class MainActivity : AppCompatActivity(), RepoListPresenter.RepoListView {
     override fun onErrorResponse(errorMsg: String) {
         if (swipeContainer.isRefreshing) swipeContainer.isRefreshing = false
         progessIndicator.visibility = View.GONE
-        Log.e(MainActivity::class.simpleName, "On Error - $errorMsg")
         Snackbar.make(
                 findViewById<View>(android.R.id.content),
                 errorMsg,

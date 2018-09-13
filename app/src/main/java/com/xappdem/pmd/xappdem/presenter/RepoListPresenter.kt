@@ -7,6 +7,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 /**
+ * This is a presenter for a RepoListView that contains
+ * logic for making list data requests and passing the response
+ * to the view
  */
 class RepoListPresenter(
         private val rxSchedulers: RxSchedulers,

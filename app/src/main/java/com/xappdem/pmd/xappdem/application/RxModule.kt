@@ -8,6 +8,8 @@ import dagger.Provides
 
 
 /**
+ * This module provides the RxScheduler dependencies
+ * to be used for the networking concurrency logic
  */
 @Module class RxModule {
 

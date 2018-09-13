@@ -6,6 +6,9 @@ import dagger.Module
 import dagger.Provides
 
 /**
+ * This class defines the dependencies that will be provided
+ * by dependency injection via dagger. This module provides
+ * application context and service dependencies
  */
 @Module
 class AppModule(private val context: Context) {

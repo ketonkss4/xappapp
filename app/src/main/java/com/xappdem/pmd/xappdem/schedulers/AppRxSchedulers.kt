@@ -7,6 +7,8 @@ import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.Executors
 
 /**
+ * This class implements RxSchedulers and provides the
+ * concrete dependencies for the different types of schedulers
  */
 class AppRxSchedulers : RxSchedulers {
 

@@ -11,6 +11,8 @@ import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 
 /**
+ * The repolist adapter is a classic recycler adapter with a view holder inner
+ * class. RxJava is used here to provide an observable to subscribe to click events
  */
 class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
 

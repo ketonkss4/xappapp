@@ -6,6 +6,7 @@ import io.reactivex.Observable
 import retrofit2.Call
 
 /**
+ * This class provides an observable for the Repo Data request
  */
 class RepoDataProvider(private val repoService: ServiceClientHelper.RepoService) {
 

@@ -9,6 +9,10 @@ import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
 
+/**
+ * This @module defines the dependencies needed for
+ * getting and displaying repo list data
+ */
 @Module
 class RepoListModule(val mainActivity: MainActivity) {
 
