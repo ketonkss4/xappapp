@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">xappdem</string>
+    <string name="owner_author_label">Owner</string>
+    <string name="repo_label">Repository</string>
+    <string name="forks_label">Forks</string>
+    <string name="stars_label">Stars</string>
+    <string name="visit_label">Visit</string>
 </resources>

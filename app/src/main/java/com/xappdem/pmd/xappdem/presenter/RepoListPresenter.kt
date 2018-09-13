@@ -2,13 +2,14 @@ package com.xappdem.pmd.xappdem.presenter
 
 import com.xappdem.pmd.xappdem.data.RepoResult
 import com.xappdem.pmd.xappdem.schedulers.RxSchedulers
+import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 /**
  */
 class RepoListPresenter(
-        private val rxSchedulers : RxSchedulers,
+        private val rxSchedulers: RxSchedulers,
         private val repoDataProvider: RepoDataProvider,
         private val repoListView: RepoListView,
         private val compositeDisposable: CompositeDisposable
@@ -18,7 +19,7 @@ class RepoListPresenter(
         fun onErrorResponse(errorMsg: String)
     }
 
-    fun onCreate(){
+    fun requestRepoList() {
         compositeDisposable.add(requestRepoListData())
     }
 
@@ -28,10 +29,9 @@ class RepoListPresenter(
                 .observeOn(rxSchedulers.uiThread())
                 .subscribe({ list ->
                     repoListView.onListDataResponse(list)
-                }, {error ->
+                }, { error ->
                     error.message?.let { repoListView.onErrorResponse(it) }
                 })
-
     }
 
     fun onDestroy() {

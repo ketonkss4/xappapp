@@ -1,5 +1,7 @@
 package com.xappdem.pmd.xappdem.data
 
+import java.io.Serializable
+
 /**
  */
 data class RepoResult(
@@ -11,4 +13,4 @@ data class RepoResult(
         val name: String,
         val language: String,
         val url: String
-)
+) : Serializable
